@@ -13,4 +13,9 @@ class SequenceFactory
     {
         return new GeometricSequence();
     }
+
+    public static function createFibonacciSequence(): Sequence
+    {
+        return new FibonacciSequence();
+    }
 }

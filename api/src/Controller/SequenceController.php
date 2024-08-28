@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\ArithmeticDto;
+use App\Model\FibonacciDto;
 use App\Model\GeometricDto;
 use App\Sequence\Sequence;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +36,18 @@ class SequenceController extends AbstractController
     ): JsonResponse
     {
         $response = $sequence->generateProgression($geometricDto);
+
+        return $this->json($response);
+    }
+
+    #[Route('/fibonacci', name: 'api_sequence_fibonacci', methods: ['GET'])]
+    public function fibonacci(
+        #[Autowire(service: 'app.sequence.fibonacci')]
+        Sequence $sequence,
+        #[MapQueryString()] FibonacciDto $fibonacciDto = new FibonacciDto(),
+    ): JsonResponse
+    {
+        $response = $sequence->generateProgression($fibonacciDto);
 
         return $this->json($response);
     }

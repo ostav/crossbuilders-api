@@ -28,5 +28,9 @@ services:
         class: App\Sequence\GeometricSequence
         factory: ['App\Sequence\SequenceFactory', 'createGeometricSequence']
 
+    app.sequence.fibonacci:
+        class: App\Sequence\FibonacciSequence
+        factory: [ 'App\Sequence\SequenceFactory', 'createFibonacciSequence' ]
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
