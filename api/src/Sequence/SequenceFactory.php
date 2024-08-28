@@ -8,4 +8,9 @@ class SequenceFactory
     {
         return new ArithmeticSequence();
     }
+
+    public static function createGeometricSequence(): Sequence
+    {
+        return new GeometricSequence();
+    }
 }
