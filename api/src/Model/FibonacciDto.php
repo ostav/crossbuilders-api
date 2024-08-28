@@ -8,6 +8,6 @@ class FibonacciDto implements SequenceParamsDto
 {
     public function __construct(
         #[Assert\GreaterThanOrEqual(1)]
-        public ?int $size = null
+        public ?int $size = 10
     ) {}
 }

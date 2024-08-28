@@ -8,10 +8,10 @@ class ArithmeticDto implements SequenceParamsDto
 {
     public function __construct(
         #[Assert\Type('integer')]
-        public ?int $start = null,
+        public ?int $start = 0,
         #[Assert\Type('integer')]
-        public ?int $end = null,
+        public ?int $end = 100,
         #[Assert\Type('integer')]
-        public ?int $increment = null
+        public ?int $increment = 1
     ) {}
 }

@@ -8,10 +8,10 @@ class GeometricDto implements SequenceParamsDto
 {
     public function __construct(
         #[Assert\GreaterThan(0)]
-        public ?int $start = null,
+        public ?int $start = 10,
         #[Assert\GreaterThan(0)]
-        public ?float $ratio = null,
+        public ?float $ratio = 2,
         #[Assert\GreaterThanOrEqual(1)]
-        public ?int $size = null
+        public ?int $size = 10
     ) {}
 }
