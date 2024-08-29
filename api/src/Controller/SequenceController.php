@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/v1/sequence')]
+#[Route('/api/v1/sequence')]
 class SequenceController extends AbstractController
 {
     #[Route('/arithmetic', name: 'api_sequence_arithmetic', methods: ['GET'])]
