@@ -11,7 +11,7 @@ class ArithmeticDto implements SequenceParamsDto
         public ?int $start = 0,
         #[Assert\Type('integer')]
         public ?int $end = 100,
-        #[Assert\Type('integer')]
+        #[Assert\GreaterThan(0)]
         public ?int $increment = 1
-    ) {}
+    ){}
 }

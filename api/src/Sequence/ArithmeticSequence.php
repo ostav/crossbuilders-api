@@ -8,10 +8,6 @@ class ArithmeticSequence implements Sequence
 {
     public function generateProgression(SequenceParamsDto $dto): array
     {
-        if ($dto->end < $dto->start) {
-            return [];
-        }
-
         $progression = [$dto->start];
         $current = $dto->start;
 
