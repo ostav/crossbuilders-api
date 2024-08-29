@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\ValueResolver;
+namespace App\ValueResolver;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
