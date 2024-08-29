@@ -13,3 +13,6 @@
 
 ### Build the application
 `` docker compose up ``
+
+### Endpoint
+``http://localhost:8080/api/v1/sequence/{sequence}``
