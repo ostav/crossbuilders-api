@@ -2,12 +2,19 @@
 
 namespace App\Sequence;
 
-use App\Model\SequenceParamsDto;
+use App\Enum\SequenceTypeEnum;
+use App\Model\SequenceDto;
 
-class FibonacciSequence implements Sequence
+class FibonacciSequence implements SequenceInterface
 {
-    public function generateProgression(SequenceParamsDto $dto): array
+    const DEFAULT_SIZE_VALUE = 30;
+    public function support(string $sequenceType): bool
     {
+        return $sequenceType === SequenceTypeEnum::FIBONACI->value;
+    }
+    public function generateSequence(SequenceDto $dto): array
+    {
+        $dto = $this->setDefaultValues($dto);
         $prev = 0;
         $current = 1;
         $loop = 0;
@@ -21,5 +28,12 @@ class FibonacciSequence implements Sequence
         }
 
         return $progression;
+    }
+
+    public function setDefaultValues(SequenceDto $dto): SequenceDto
+    {
+        $dto->size = $dto->size === null ? self::DEFAULT_SIZE_VALUE : $dto->size;
+
+        return $dto;
     }
 }

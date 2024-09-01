@@ -57,6 +57,7 @@ class SequenceValueResolver implements ValueResolverInterface, EventSubscriberIn
 
     public function onKernelResponseArguments(ExceptionEvent $event): void
     {
-        $event->setResponse(new JsonResponse([$event->getThrowable()->getMessage()], Response::HTTP_NO_CONTENT));
+        $sequence = $event->getRequest()->get('sequence');
+        $event->setResponse(new JsonResponse(["No sequence found of type {$sequence}"], Response::HTTP_NOT_FOUND));
     }
 }
