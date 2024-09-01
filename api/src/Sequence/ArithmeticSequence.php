@@ -10,6 +10,7 @@ class ArithmeticSequence implements SequenceInterface
     const DEFAULT_START_VALUE = 1;
     const DEFAULT_SIZE_VALUE = 10;
     const DEFAULT_INCREMENT_VALUE = 1;
+
     public function support(string $sequenceType): bool
     {
         return $sequenceType === SequenceTypeEnum::ARITHMETIC->value;

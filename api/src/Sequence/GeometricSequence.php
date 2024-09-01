@@ -10,6 +10,7 @@ class GeometricSequence implements SequenceInterface
     const DEFAULT_START_VALUE = 1;
     const DEFAULT_SIZE_VALUE = 10;
     const DEFAULT_RATIO_VALUE = 2;
+
     public function support(string $sequenceType): bool
     {
         return $sequenceType === SequenceTypeEnum::GEOMETRIC->value;

@@ -8,6 +8,7 @@ use App\Model\SequenceDto;
 class FibonacciSequence implements SequenceInterface
 {
     const DEFAULT_SIZE_VALUE = 30;
+
     public function support(string $sequenceType): bool
     {
         return $sequenceType === SequenceTypeEnum::FIBONACI->value;
