@@ -2,55 +2,28 @@
 
 namespace App\Controller;
 
-use App\Model\ArithmeticDto;
-use App\Model\FibonacciDto;
-use App\Model\GeometricDto;
-use App\Sequence\Sequence;
+use App\Enum\SequenceTypeEnum;
+use App\Model\SequenceDto;
+use App\Sequence\SequenceFactory;
+use App\ValueResolver\SequenceValueResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/api/v1/sequence')]
+#[Route('/api/v1')]
 class SequenceController extends AbstractController
 {
-    #[Route('/arithmetic', name: 'api_sequence_arithmetic', methods: ['GET'])]
-    public function arithmetic(
-        #[Autowire(service: 'app.sequence.arithmetic')]
-        Sequence $sequence,
-        #[MapQueryString()]
-        ArithmeticDto $arithmeticDto = new ArithmeticDto()
+    #[Route('/sequence/{sequence}', name: 'api_sequence_arithmetic', methods: ['GET'])]
+    public function sequence(
+        SequenceTypeEnum $sequence,
+        SequenceFactory $sequenceFactory,
+        #[MapQueryString(resolver: SequenceValueResolver::class)]
+        SequenceDto $dto = new SequenceDto(),
     ): JsonResponse
     {
-        $response = $sequence->generateProgression($arithmeticDto);
+        $sequenceProvider = $sequenceFactory->getSequenceProvider($sequence->value);
 
-        return $this->json($response);
-    }
-
-    #[Route('/geometric', name: 'api_sequence_geometric', methods: ['GET'])]
-    public function geometric(
-        #[Autowire(service: 'app.sequence.geometric')]
-        Sequence $sequence,
-        #[MapQueryString()]
-        GeometricDto $geometricDto = new GeometricDto(),
-    ): JsonResponse
-    {
-        $response = $sequence->generateProgression($geometricDto);
-
-        return $this->json($response);
-    }
-
-    #[Route('/fibonacci', name: 'api_sequence_fibonacci', methods: ['GET'])]
-    public function fibonacci(
-        #[Autowire(service: 'app.sequence.fibonacci')]
-        Sequence $sequence,
-        #[MapQueryString()]
-        FibonacciDto $fibonacciDto = new FibonacciDto(),
-    ): JsonResponse
-    {
-        $response = $sequence->generateProgression($fibonacciDto);
-
-        return $this->json($response);
+        return $this->json($sequenceProvider->generateSequence($dto));
     }
 }

@@ -4,14 +4,16 @@ namespace App\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ArithmeticDto implements SequenceParamsDto
+class SequenceDto
 {
     public function __construct(
-        #[Assert\Type('integer')]
-        public ?int $start = 0,
-        #[Assert\Type('integer')]
-        public ?int $end = 100,
         #[Assert\GreaterThan(0)]
-        public ?int $increment = 1
+        public ?float $ratio = null ,
+        #[Assert\Type('integer')]
+        public ?int $start = null,
+        #[Assert\Type('integer')]
+        public ?int $size = null,
+        #[Assert\GreaterThan(0)]
+        public ?int $increment = null,
     ){}
 }

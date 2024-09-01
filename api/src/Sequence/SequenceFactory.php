@@ -2,20 +2,24 @@
 
 namespace App\Sequence;
 
-class SequenceFactory
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+final readonly class SequenceFactory
 {
-    public static function createArithmeticSequence(): Sequence
-    {
-        return new ArithmeticSequence();
+    public function __construct(
+        #[AutowireIterator('sequence_provider')]
+        private iterable $sequenceProviders
+    ) {
     }
 
-    public static function createGeometricSequence(): Sequence
+    public function getSequenceProvider(string $sequenceType): SequenceInterface
     {
-        return new GeometricSequence();
-    }
+        /** @var SequenceInterface $sequenceProvider */
+        foreach ($this->sequenceProviders as $sequenceProvider) {
+            if ($sequenceProvider->support($sequenceType)) {
+                return $sequenceProvider;
+            }
+        }
 
-    public static function createFibonacciSequence(): Sequence
-    {
-        return new FibonacciSequence();
+        throw new \Exception('No sequence found');
     }
 }
